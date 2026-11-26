@@ -1,0 +1,373 @@
+[
+ {
+  "run": "bd1b793241",
+  "note": "标准流程：不触发检索，直接给合规结论",
+  "question": "我们准备上线「AI 试妆 + 一键购」。用户上传人脸生成试妆图，可分享、可关水印；信息流能跳转下单，达人寄样笔记没统一标广告；进功能要相机相册定位，不给相机就用不了；隐私政策写人脸用于服务和改进，可能共享给关联公司和商家，没有单独弹窗；还想用上传图和日志继续训模型。商家挂美妆货只看执照。\n请按新产品上线合规来评：\n1.\n上线前必须挡的红线（建议直接不通过的）\n2.\n可带条件上线的项（上线前最小改动）\n3.\n可上线后迭代的项\n4.\n对平台运营方的主要合规风险（写清主体）\n5.\n上线评审用的检查清单和仍需业务补充的材料",
+  "intake": {
+   "legal_domain": "产品合规",
+   "task_goals": [
+    "合规审查",
+    "风险审查"
+   ],
+   "known_facts": [
+    "隐私政策写人脸用于服务和改进",
+    "用户上传人脸生成试妆图",
+    "达人寄样笔记没统一标广告",
+    "可能共享给关联公司和商家",
+    "对平台运营方的主要合规风险（写清主体）"
+   ],
+   "missing_facts": [
+    "产品形态（App/平台/直播/模型）与角色（运营方/商家/达人）",
+    "现有隐私政策、授权弹窗或平台规则文本",
+    "监管来函/投诉/诉讼所处阶段与已采取措施"
+   ],
+   "user_side": "提问方作为产品/平台运营方或内部合规"
+  },
+  "plan": [
+   {
+    "name": "formal-legal-consequence",
+    "reason": "问题涉及广告宣传、行政处罚或消费者责任后果",
+    "requires_mcp": false
+   },
+   {
+    "name": "internal-compliance-risk-identification",
+    "reason": "问题涉及产品、数据或内部合规风险",
+    "requires_mcp": false
+   },
+   {
+    "name": "judgment-document-generation",
+    "reason": "用户要求生成裁判文书草稿",
+    "requires_mcp": false
+   }
+  ],
+  "mcp_required": false,
+  "tool_calls": [],
+  "validation": {
+   "mcp_called_when_required": null,
+   "tool_result_checks": [],
+   "answer_truncated": false
+  },
+  "answer_excerpt": "「AI 试妆 + 一键购」上线合规评审如下。\n\n一、上线前必须挡的红线（建议直接不通过）\n\n1. 人脸信息无单独同意。人脸属于生物识别信息，是敏感个人信息。按个人信息保护法第二十九条，处理敏感个人信息必须取得用户单独同意；按第十七条，须告知处理目的、方式、种类、保存期限。现状是隐私政策里笼统写\"用于服务和改进\"，无单独弹窗、无单独同意，直接不通过。这是本次最高优先级红线。\n\n2. 用上传图和日志继续训模型，无独立授权。将用户人脸图、使用日志用于模型训练，属于超出原处理目的的新用途，须重新取得同意，且人脸训练涉及敏感信息处理，同样须单独同意。未取得前不得启动训练。直接不通过。\n\n3. 强制索权，不给相机就用不了。按个人信息保护法第十六条，不得以用户不同意为由拒绝提供基本功能服务；按第六条的收集最小必要原则，应把相机相册定位设为按需申请。现状是进功能即要相机相册定位，且拒绝相机即无法使用，属于强制索权，直接不通过。\n\n4. 信息共享给关联公司和商家，无单独同意、无清单。按第二十三条，向第三方提供个人信息须告知接收方名称、联系方式、处理目的、处理方式、信息种类，并取得单独同意。现状无单独弹窗、无第三方清单，直接不通过。\n\n5. 达",
+  "elapsed_s": 10.5
+ },
+ {
+  "run": "c3a062d631",
+  "note": "标准流程：明确要求检索，走法条 + 案例两步",
+  "question": "检索案例：线上门店地址找不到对应实体店，存在虚假门店，平台扣除风险保证金，商家不服提起诉讼。",
+  "intake": {
+   "legal_domain": "产品合规",
+   "task_goals": [
+    "合规审查",
+    "风险审查"
+   ],
+   "known_facts": [
+    "平台扣除风险保证金"
+   ],
+   "missing_facts": [
+    "产品形态（App/平台/直播/模型）与角色（运营方/商家/达人）",
+    "现有隐私政策、授权弹窗或平台规则文本",
+    "监管来函/投诉/诉讼所处阶段与已采取措施"
+   ],
+   "user_side": "默认从提问人立场分析"
+  },
+  "plan": [
+   {
+    "name": "case-retrieval",
+    "reason": "用户明确要求调用法宝或检索",
+    "requires_mcp": true
+   }
+  ],
+  "mcp_required": true,
+  "tool_calls": [
+   {
+    "tool": "pkulaw_case_semantic_search_case",
+    "args": "{\"text\": \"线上门店地址找不到对应实体店，虚假门店，平台扣除商家风险保证金，商家不服起诉平台\", \"size\": 10}"
+   },
+   {
+    "tool": "pkulaw_case_semantic_search_case",
+    "args": "{\"text\": \"平台依据规则扣除商家保证金 商家主张平台违约返还保证金 网络服务合同纠纷\", \"size\": 10}"
+   }
+  ],
+  "validation": {
+   "mcp_called_when_required": true,
+   "tool_result_checks": [
+    {
+     "tool_name": "pkulaw_case_semantic_search_case",
+     "result_type": "case",
+     "empty": false,
+     "looks_error": false,
+     "has_case_number": true,
+     "has_law_article": true,
+     "metadata_ok": true,
+     "length": 6014,
+     "relevance": "strong",
+     "support": "partially_supported",
+     "question_overlap": 0.22,
+     "claim_overlap": 0.0
+    },
+    {
+     "tool_name": "pkulaw_case_semantic_search_case",
+     "result_type": "case",
+     "empty": false,
+     "looks_error": true,
+     "has_case_number": true,
+     "has_law_article": true,
+     "metadata_ok": true,
+     "length": 6014,
+     "relevance": null,
+     "support": null
+    }
+   ],
+   "answer_truncated": false
+  },
+  "answer_excerpt": "案例检索结果\n\n检索工具：北大法宝司法案例库（语义检索）\n检索时间：2026年9月24日\n检索式：①线上门店地址找不到对应实体店/虚假门店/平台扣除风险保证金/商家起诉；②平台依据规则扣除商家保证金、商家主张返还、网络服务合同纠纷\n筛选：网络服务合同纠纷，近5年优先，普通案例\n\n一、检索到的可用类案\n\nA组 核心类案\n\n1. 姜某与某某公司网络服务合同纠纷一审\n案号：(2024)沪0105民初XXXX号\n法院：上海市长宁区人民法院，2024-08-16\n案由：网络服务合同纠纷\n关键事实：商家店铺存在虚假交易（虚假发货、物流异常、签收异常等）；平台对店铺货款及保证金账户采取限制提现措施；商家称其经营线下实体店、系线下交易。\n裁判结论：平台有事实及合同依据采取限制提现措施；从衡平保护消费者、商家、平台三方角度，结合违规订单数量、金额、过错程度，酌定平台扣收保证金及货款尚属合理范围；商家违约，利息主张不予支持。\n参考价值：与\"虚假门店/虚假交易—平台扣保证金—商家不服\"事实最接近，直接支持平台扣款的合同与衡平双重依据。\n\n2. 刘大龙与上海寻梦信息技术有限公司网络服务合同纠纷二审\n案号：(2019)沪01民终XXXX号\n法院：上海",
+  "elapsed_s": 15.8
+ },
+ {
+  "run": "705cf434b0",
+  "note": "标准流程：合同纠纷，单步检索",
+  "question": "北京房屋买卖，中介是链家公司，签署居间服务合同前，中介口述房屋没有漏水情况，且签署的居间合同注明：没有进行漏水检查，没有漏水检查报告，买卖双方自行确认漏水情况；卖方书面承诺房屋从未发现任何漏水情况，现买方已经缴纳中介费和10万房屋定金，在装修时发现房屋存在5处漏水情况，对此，买方可否以隐瞒事实或者其他理由主张退还中介费，有没有相关案例",
+  "intake": {
+   "legal_domain": "合同",
+   "task_goals": [
+    "检索法条",
+    "检索案例"
+   ],
+   "known_facts": [
+    "房屋买卖发生在北京",
+    "中介为链家公司",
+    "签署居间服务合同前，中介口述房屋没有漏水情况",
+    "居间合同注明：没有进行漏水检查，没有漏水检查报告，买卖双方自行确认漏水情况",
+    "卖方书面承诺房屋从未发现任何漏水情况",
+    "买方已缴纳中介费"
+   ],
+   "missing_facts": [
+    "居间服务合同的具体条款内容，特别是关于中介义务、信息披露、免责或责任限制的约定",
+    "中介口头陈述房屋无漏水的具体时间、方式及是否有证据（如录音、聊天记录）",
+    "卖方书面承诺的具体形式及是否载入买卖合同",
+    "漏水问题是否在房屋交付前已存在及是否属于隐蔽瑕疵",
+    "中介是否知晓或应当知晓漏水情况",
+    "买方是否已向卖方或中介主张权利及对方的回应"
+   ],
+   "user_side": "买方"
+  },
+  "plan": [
+   {
+    "name": "case-retrieval",
+    "reason": "用户明确要求调用法宝或检索",
+    "requires_mcp": true
+   }
+  ],
+  "mcp_required": true,
+  "tool_calls": [
+   {
+    "tool": "pkulaw_case_semantic_search_case",
+    "args": "{\"text\": \"居间合同纠纷 中介未如实告知房屋漏水 买卖双方自行确认 买方主张退还中介费\", \"case_type\": \"民事案件\", \"size\": 10}"
+   },
+   {
+    "tool": "pkulaw_case_semantic_search_case",
+    "args": "{\"text\": \"房屋买卖居间服务合同 中介隐瞒房屋质量瑕疵 违反如实报告义务 中介费返还\", \"case_type\": \"民事案件\", \"size\": 10}"
+   }
+  ],
+  "validation": {
+   "mcp_called_when_required": true,
+   "tool_result_checks": [
+    {
+     "tool_name": "pkulaw_case_semantic_search_case",
+     "result_type": "case",
+     "empty": false,
+     "looks_error": false,
+     "has_case_number": true,
+     "has_law_article": true,
+     "metadata_ok": true,
+     "length": 6014,
+     "relevance": "strong",
+     "support": "supported",
+     "question_overlap": 0.267,
+     "claim_overlap": 0.182
+    },
+    {
+     "tool_name": "pkulaw_case_semantic_search_case",
+     "result_type": "case",
+     "empty": false,
+     "looks_error": false,
+     "has_case_number": true,
+     "has_law_article": true,
+     "metadata_ok": true,
+     "length": 6014,
+     "relevance": "strong",
+     "support": "supported",
+     "question_overlap": 0.177,
+     "claim_overlap": 0.182
+    }
+   ],
+   "answer_truncated": false
+  },
+  "answer_excerpt": "可以主张，但结论取决于证据：能证明中介“明知或应知漏水仍口头说没问题”，才可能全额退中介费；否则多数北京法院只按“服务瑕疵”酌定退一部分。以下是基于你提供事实的初步分析，非正式法律意见。\n\n一、合规与责任结论（分情形）\n\n1. 若中介明知/应知房屋漏水，仍口头保证“没有漏水”，且居间合同用“未检查、双方自行确认”条款免责：构成故意隐瞒或提供虚假情况，依法不得请求报酬，应退还中介费并可能赔偿。但该免责条款在存在故意隐瞒时，通常不能对抗此项法定责任。\n2. 若中介并不知情、无从得知（如卖方书面承诺无漏水、看房时无痕迹）：法院多认定其已完成主要居间义务，仅因未尽审慎核查而构成“服务瑕疵”，酌定退还部分中介费（不必然全退）。\n3. 你目前的难点：口头说“没有漏水”通常难以举证；而合同白纸黑字写“未做漏水检查、双方自行确认”，加上卖方书面承诺无漏水，卖方口径与中介一致，会削弱“中介隐瞒”的认定。\n\n二、责任主体拆分\n\n• 中介（链家公司）：如实报告义务主体。是否退费看其主观状态与履约瑕疵。\n• 卖方：对房屋质量负主要瑕疵担保和违约责任，漏水隐蔽瑕疵通常由其承担修复、赔偿或对定金/合同的处理。\n• 买方（你）：对房屋现状有实地看房和审慎",
+  "elapsed_s": 20.4
+ },
+ {
+  "run": "3832c7d624",
+  "note": "**重构前的错误样例**：元问题却规划了检索技能，白跑一次付费接口",
+  "question": "调用北大法宝了吗",
+  "intake": {
+   "legal_domain": "产品合规",
+   "task_goals": [
+    "确认是否已调用北大法宝进行法律检索"
+   ],
+   "known_facts": [
+    "用户提问：调用北大法宝了吗"
+   ],
+   "missing_facts": [
+    "用户具体希望检索的法条、案例或法律问题",
+    "是否已实际执行过北大法宝调用"
+   ],
+   "user_side": "默认从提问人立场分析"
+  },
+  "plan": [
+   {
+    "name": "legal-article-retrieval",
+    "reason": "用户明确要求调用法宝或检索",
+    "requires_mcp": true
+   }
+  ],
+  "mcp_required": true,
+  "tool_calls": [
+   {
+    "tool": "pkulaw_law_semantic_search_article",
+    "args": "{\"text\": \"处理敏感个人信息人脸信息取得单独同意 个人信息保护影响评估\", \"lib\": \"中央\", \"timeliness\": \"现行有效\", \"size\": 10}"
+   },
+   {
+    "tool": "pkulaw_law_semantic_search_article",
+    "args": "{\"text\": \"App强制索取相机相册定位权限 不得拒绝提供基本功能服务 最小必要\", \"lib\": \"中央\", \"timeliness\": \"现行有效\", \"size\": 10}"
+   }
+  ],
+  "validation": {
+   "mcp_called_when_required": true,
+   "tool_result_checks": [
+    {
+     "tool_name": "pkulaw_law_semantic_search_article",
+     "result_type": "law",
+     "empty": false,
+     "looks_error": false,
+     "has_case_number": false,
+     "has_law_article": true,
+     "metadata_ok": true,
+     "length": 6014,
+     "relevance": "unrelated",
+     "support": "unsupported",
+     "question_overlap": 0.0,
+     "claim_overlap": 0.047
+    },
+    {
+     "tool_name": "pkulaw_law_semantic_search_article",
+     "result_type": "law",
+     "empty": false,
+     "looks_error": false,
+     "has_case_number": false,
+     "has_law_article": true,
+     "metadata_ok": true,
+     "length": 6014,
+     "relevance": "partial",
+     "support": "partially_supported",
+     "question_overlap": 0.056,
+     "claim_overlap": 0.047
+    }
+   ],
+   "answer_truncated": false
+  },
+  "answer_excerpt": "刚才几轮产品合规的分析，确实没有实际调用北大法宝，是依据我对相关法律法规的了解作答的。你一提醒，我已实际检索，结果如下，供你核对。\n\n本轮检索到的现行有效规范\n\n1. 中华人民共和国个人信息保护法，全国人大常委会，主席令第91号，2021-08-20，现行有效。第二十九条原文：处理敏感个人信息应当取得个人的单独同意；法律、行政法规规定处理敏感个人信息应当取得书面同意的，从其规定。\n\n2. 人脸识别技术应用安全管理办法，国家网信办、公安部令第19号，2025-03-13，现行有效。第九条：应用人脸识别技术处理人脸信息，应当事前进行个人信息保护影响评估并记录，评估内容含处理目的方式是否合法正当必要、对个人权益影响、泄露风险、保护措施是否相适应；评估报告和处理记录至少保存3年；目的方式变化或发生重大安全事件应重新评估。\n\n3. 网络数据安全管理条例，国务院令第790号，2024-09-24，现行有效。第二十二条：收集个人信息须为提供产品服务所必需，不得超范围收集，不得误导欺诈胁迫取得同意；处理生物识别等敏感个人信息应取得单独同意；不得超出同意的目的方式种类保存期限处理；目的方式种类变更应重新取得同意。\n\n4. 常见类型移动互联网应",
+  "elapsed_s": 9.3
+ },
+ {
+  "run": "034da1185c",
+  "note": "**重构前的错误样例**：简报串台，个人信息问题被判成民间借贷（现由 6 条硬覆盖兜底）",
+  "question": "程序注册要手机号，销售把客户名单导出给代理商发促销短信，代理商又转给电销公司。隐私政策写了“可能与合作方共享”，但没有单独弹窗。用户投诉到网信。这个算违法提供个人信息吗，现在要先停哪一步。",
+  "intake": {
+   "legal_domain": "民间借贷",
+   "task_goals": [
+    "检索案例",
+    "检索法条",
+    "风险审查",
+    "概念区分"
+   ],
+   "known_facts": [
+    "2023年至2024年一年期LPR大致在3.45%左右",
+    "2024年某月",
+    "2020年8月20日之前成立",
+    "2020年8月20日之后按起诉时LPR四倍计算（第二十五条、第三十一条）",
+    "2024年3月",
+    "2020年被取代"
+   ],
+   "missing_facts": [
+    "借款金额和时间",
+    "有无借条或借款合同",
+    "约定利率",
+    "款项进入谁的账户"
+   ],
+   "user_side": null
+  },
+  "plan": [
+   {
+    "name": "case-retrieval",
+    "reason": "用户明确要求调用法宝或 MCP 检索",
+    "requires_mcp": true
+   },
+   {
+    "name": "legal-article-retrieval",
+    "reason": "问题需要法条或规范依据",
+    "requires_mcp": true
+   },
+   {
+    "name": "evidence-evaluation",
+    "reason": "问题核心是证据证明力或举证路径",
+    "requires_mcp": false
+   }
+  ],
+  "mcp_required": true,
+  "tool_calls": [
+   {
+    "tool": "pkulaw_law_semantic_search_article",
+    "args": "{\"text\": \"个人信息处理者向他人提供个人信息 需取得个人单独同意 向个人告知接收方身份 处理目的 处理方式\", \"lib\": \"中央\", \"timeliness\": \"现行有效\"}"
+   },
+   {
+    "tool": "pkulaw_case_semantic_search_case",
+    "args": "{\"text\": \"App隐私政策概括同意 未经单独同意向第三方提供客户手机号 合作方转委托电销公司发送营销短信 违法提供个人信息\", \"size\": 10}"
+   }
+  ],
+  "validation": {
+   "mcp_called_when_required": true,
+   "tool_result_checks": [
+    {
+     "tool_name": "pkulaw_law_semantic_search_article",
+     "result_type": "law",
+     "empty": false,
+     "looks_error": false,
+     "has_case_number": false,
+     "has_law_article": true,
+     "metadata_ok": true,
+     "length": 6014,
+     "relevance": "partial",
+     "support": "supported",
+     "question_overlap": 0.057,
+     "claim_overlap": 0.087
+    },
+    {
+     "tool_name": "pkulaw_case_semantic_search_case",
+     "result_type": "case",
+     "empty": false,
+     "looks_error": true,
+     "has_case_number": false,
+     "has_law_article": false,
+     "metadata_ok": false,
+     "length": 213,
+     "relevance": null,
+     "support": null
+    }
+   ],
+   "answer_truncated": false
+  },
+  "answer_excerpt": "按计划完成检索。以下是分析报告。\n\n一、检索概况\n\n工具：北大法宝法条语义检索、案例语义检索（语义不可用，已自动改关键词检索）。\n检索式（法条）：个人信息处理者向他人提供个人信息 需取得个人单独同意 告知接收方身份、处理目的、处理方式。\n检索式（案例）：App隐私政策概括同意 未经单独同意向第三方提供客户手机号 合作方转委托电销公司 违法提供个人信息。\n检索式（案例，第二轮）：侵害公民个人信息 未经同意向第三方提供手机号 行政处罚 民事诉讼。\n\n二、检索到的法条依据（现行有效）\n\n1. 个人信息保护法第二十三条（主席令第91号，2021-08-20）。核心规则：个人信息处理者向其他处理者提供个人信息，应当告知接收方名称、联系方式、处理目的、处理方式和个人信息种类，并取得个人的单独同意；接收方只能在上述范围内处理，变更目的方式的须重新取得同意。这是本案的核心依据。\n\n2. 个人信息保护法第十四条、第十七条（同法）。处理个人信息应取得同意，该同意须充分知情、自愿、明确；处理前应以显著方式、清晰易懂语言告知处理目的、方式、种类、保存期限等。\n\n3. 个人信息保护法第二十一条。委托处理须约定委托目的、期限、处理方式、保护措施及双方权",
+  "elapsed_s": 31.7
+ }
+]
